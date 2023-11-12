@@ -11,6 +11,7 @@ pipeline {
         stage('Build and Push Docker Compose') {
             steps {
                 script {
+                    echo 'actually inside stage 2'
                     docker.withRegistry('https://hub.docker.com', 'dockerhub-credentials') {
                         sh 'docker-compose -f docker-compose.yml build'
                         sh 'docker-compose -f docker-compose.yml push'
