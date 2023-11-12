@@ -2,14 +2,14 @@ version: '3'
 
 services:
   frontend:
-    image: https://hub.docker.com/hazemkaroui/frontend:latest
+    image: https://hub.docker.com/hazemkaroui/frontend
     build:
       context: ./frontend
     ports:
       - "3000:3000"
 
   backend:
-    image: https://hub.docker.com/hazemkaroui/backend:latest
+    image: https://hub.docker.com/hazemkaroui/backend
     build:
       context: ./backend
     environment:
