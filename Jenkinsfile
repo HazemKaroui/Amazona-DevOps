@@ -8,6 +8,17 @@ pipeline {
             }
         }
 
+        stage('Login to Docker Registry') {
+            steps {
+                script {
+                    // Assuming 'your-registry-credentials' is the Jenkins credentials ID for Docker registry
+                    withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                        sh "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD https://hub.docker.com"
+                    }
+                }
+            }
+        }
+
         stage('Build and Push') {
             steps {
                 script {
