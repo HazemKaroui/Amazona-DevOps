@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: backend-deployment
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: backend
@@ -13,10 +13,10 @@ spec:
         app: backend
     spec:
       containers:
-      - name: backend
-        image: mern-amazona_backend
-        ports:
-        - containerPort: 4000
-        env:
-        - name: MONGODB_URI
-          value: "mongodb://mongodb-service:27017/nicedb"
+        - name: backend
+          image: hazemkaroui/backend:latest
+          ports:
+            - containerPort: 4000
+          env:
+            - name: MONGODB_URI
+              value: "mongodb://mongo:27017/nicedb"
