@@ -26,6 +26,29 @@ pipeline {
                 }
             }
         }
+
+        stage('Deploy to Kubernetes') {
+            steps {
+                script {
+                    // Get the list of available Kubernetes contexts
+                    def kubeContexts = sh(script: 'kubectl config get-contexts -o name', returnStdout: true).trim()
+                    
+                    // Iterate over each context and deploy
+                    kubeContexts.split().each { context ->
+                        echo "Deploying to Kubernetes context: ${context}"
+                        
+                        // Set Kubernetes context
+                        sh "kubectl config use-context ${context}"
+                        
+                        // Apply Kubernetes deployment and service configurations
+                        sh 'kubectl apply -f frontend-deployment.yaml'
+                        sh 'kubectl apply -f backend-deployment.yaml'
+                        sh 'kubectl apply -f frontend-service.yaml'
+                        sh 'kubectl apply -f backend-service.yaml'
+                    }
+                }
+            }
+        }
     }
 
     post {
