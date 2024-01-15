@@ -1,5 +1,4 @@
 # Amazon clone Deployment with Docker, Kubernetes, and Jenkins
-By *Ilhem Elmissaoui* & *Hazem Karoui*
 
 
 - [Introduction](#introduction)
